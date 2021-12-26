@@ -28,11 +28,9 @@ const list = computed(() => {
 })
 // 控制导航菜单隐藏与显示
 const show = (item) => {
-  console.log('show');
   store.commit('category/show', item)
 }
 const hide = (item) => {
-  console.log('hide');
   store.commit('category/hide', item)
 }
 

@@ -10,7 +10,7 @@ import store from '@/store'
 import router from '@/router'
 
 const instance = axios.create({
-  baseURL: process.env.VUE_APP_BASE_API,
+  baseURL: process.env.VUE_APP_BASE_URL,
   timeout: process.env.VUE_APP_TIME_OUT
 })
 
@@ -36,7 +36,7 @@ instance.interceptors.request.use(config => {
 
 // 响应拦截器
 instance.interceptors.response.use(res => {
-  res.data
+  return res.data
 }, err => {
   // 401错误码 进入该函数
   if(err.response && err.response.status === 401) {
@@ -54,7 +54,7 @@ instance.interceptors.response.use(res => {
 })
 
 // 请求工具函数
-const request = (url, method, submitData) => {
+export default (url, method, submitData) => {
   // 负责发请求：请求地址、请求方式、提交数据
   return instance({
     url,
@@ -62,5 +62,3 @@ const request = (url, method, submitData) => {
     [method.toLowerCase() === 'get' ? 'params' : 'data']: submitData
   })
 }
-
-export { request }
